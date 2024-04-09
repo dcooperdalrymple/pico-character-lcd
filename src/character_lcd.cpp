@@ -15,7 +15,7 @@ CharacterLCD::CharacterLCD(uint8_t columns, uint8_t rows) {
 
     // Initialize display registers
     this->display_control = LCD_DISPLAYON | LCD_CURSOROFF | LCD_BLINKOFF;
-    this->display_function = LCD_4BITMODE | LCD_1LINE | LCD_2LINE | LCD_5x8DOTS;
+    this->display_function = LCD_1LINE | LCD_2LINE | LCD_5x8DOTS;
     this->display_mode = LCD_ENTRYLEFT | LCD_ENTRYSHIFTDECREMENT;
 
     // Setup buffer
@@ -129,7 +129,7 @@ void CharacterLCD::write(const char * data, uint8_t col, uint8_t row, uint8_t le
     }
 
     for (i = 0, j = 0; i < len; i++) {
-        this->input_buffer[col + i + row * this->rows] = ((i >= pad && data[j] != '\0') ? data[j++] : ' ');
+        this->input_buffer[col + i + row * this->columns] = ((i >= pad && data[j] != '\0') ? data[j++] : ' ');
     }
     this->needs_update = true;
 
@@ -163,8 +163,9 @@ void CharacterLCD::update(bool reset_cursor) {
     for (i = 0; i < this->columns * this->rows; i++) {
         if (this->input_buffer[i] == '\0' || this->input_buffer[i] == this->output_buffer[i]) continue;
         start = i;
+        break;
     }
-    len = start - end + 1;
+    len = end - start + 1;
 
     // Set cursor position
     this->cursor_position(start % this->columns, start / this->columns, !reset_cursor);
@@ -173,7 +174,7 @@ void CharacterLCD::update(bool reset_cursor) {
     for (i = start; i <= end; i++) {
         if (this->input_buffer[i] == '\0') continue;
         this->output_buffer[i] = this->input_buffer[i];
-        this->put(this->output_buffer[i]);
+        this->put(this->output_buffer[i], true);
     }
 
     // Return cursor position to original
@@ -254,7 +255,7 @@ void CharacterLCD::write_vertical_graph(uint8_t value, uint8_t col, uint8_t row)
 };
 
 void CharacterLCD::write_horizontal_graph(uint8_t value, uint8_t col, uint8_t row, uint8_t width, bool centered) {
-    this->write_graph(value, col, row, width, false, centered);
+    this->write_graph((float)value / 255.0f, col, row, width, false, centered);
 };
 void CharacterLCD::write_horizontal_graph(uint8_t value, uint8_t col, uint8_t row, uint8_t width) {
     this->write_horizontal_graph(value, col, row, width, false);

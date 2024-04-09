@@ -12,6 +12,8 @@ CharacterLCD_8Bit::CharacterLCD_8Bit(uint8_t columns, uint8_t rows, uint rs, uin
     for (uint8_t i = 0; i < 8; i++) {
         this->d[i]->set_dir(true);
     }
+
+    this->display_function |= LCD_8BITMODE;
     this->init();
 };
 
@@ -27,6 +29,8 @@ CharacterLCD_8Bit::CharacterLCD_8Bit(uint8_t columns, uint8_t rows, DigitalInOut
     for (uint8_t i = 0; i < 8; i++) {
         this->d[i]->set_dir(true);
     }
+
+    this->display_function |= LCD_8BITMODE;
     this->init();
 };
 

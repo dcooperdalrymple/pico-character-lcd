@@ -8,6 +8,9 @@ CharacterLCD_4Bit::CharacterLCD_4Bit(uint8_t columns, uint8_t rows, uint rs, uin
     for (uint8_t i = 0; i < 4; i++) {
         this->d[i]->set_dir(true);
     }
+
+    this->display_function |= LCD_4BITMODE;
+    this->init();
 };
 
 CharacterLCD_4Bit::CharacterLCD_4Bit(uint8_t columns, uint8_t rows, DigitalInOut *rs, DigitalInOut *en, DigitalInOut *d4, DigitalInOut *d5, DigitalInOut *d6, DigitalInOut *d7) : CharacterLCD_GPIO(columns, rows, rs, en) {
@@ -18,6 +21,9 @@ CharacterLCD_4Bit::CharacterLCD_4Bit(uint8_t columns, uint8_t rows, DigitalInOut
     for (uint8_t i = 0; i < 4; i++) {
         this->d[i]->set_dir(true);
     }
+    
+    this->display_function |= LCD_4BITMODE;
+    this->init();
 };
 
 CharacterLCD_4Bit::~CharacterLCD_4Bit() {

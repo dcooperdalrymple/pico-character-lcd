@@ -105,12 +105,12 @@ protected:
     virtual void put(uint8_t value) { };
     virtual void put(uint8_t value, bool char_mode) { };
 
+    // Control flags
+    uint8_t display_control, display_function, display_mode;
+
 private:
     // Parameters
     uint8_t columns, rows;
-
-    // Control flags
-    uint8_t display_control, display_function, display_mode;
 
     // Cursor position
     uint8_t column, row;
