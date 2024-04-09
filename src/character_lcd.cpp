@@ -114,7 +114,7 @@ void CharacterLCD::display(bool enable) {
     this->put(LCD_DISPLAYCONTROL | this->display_control);
 };
 
-void CharacterLCD::write(char * data, uint8_t col, uint8_t row, uint8_t len, bool right_aligned) {
+void CharacterLCD::write(const char * data, uint8_t col, uint8_t row, uint8_t len, bool right_aligned) {
     uint8_t i, j, pad = 0;
 
     col = MIN(col, this->columns-1);
@@ -135,13 +135,13 @@ void CharacterLCD::write(char * data, uint8_t col, uint8_t row, uint8_t len, boo
 
     // TODO: Handle newline?
 };
-void CharacterLCD::write(char * data, uint8_t col, uint8_t row, uint8_t len) {
+void CharacterLCD::write(const char * data, uint8_t col, uint8_t row, uint8_t len) {
     this->write(data, col, row, len, false);
 };
-void CharacterLCD::write(char * data, uint8_t col, uint8_t row) {
+void CharacterLCD::write(const char * data, uint8_t col, uint8_t row) {
     this->write(data, col, row, 0);
 };
-void CharacterLCD::write(char * data) {
+void CharacterLCD::write(const char * data) {
     this->write(data, 0, 0);
 };
 

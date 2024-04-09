@@ -74,10 +74,10 @@ public:
     bool display_enabled();
     void display(bool enable);
 
-    void write(char * data, uint8_t col, uint8_t row, uint8_t len, bool right_aligned);
-    void write(char * data, uint8_t col, uint8_t row, uint8_t len);
-    void write(char * data, uint8_t col, uint8_t row);
-    void write(char * data);
+    void write(const char * data, uint8_t col, uint8_t row, uint8_t len, bool right_aligned);
+    void write(const char * data, uint8_t col, uint8_t row, uint8_t len);
+    void write(const char * data, uint8_t col, uint8_t row);
+    void write(const char * data);
 
     void update(bool reset_cursor);
     void update();
