@@ -189,12 +189,24 @@ void CharacterLCD::update() {
 
 void CharacterLCD::move_left() {
     this->put(LCD_CURSORSHIFT | LCD_DISPLAYMOVE | LCD_MOVELEFT);
-    // TODO: Update buffer?
+    this->reset_buffer(true);
+    if (this->column > 0) {
+        this->column--;
+    } else if (this->row > 0) {
+        this->row--;
+        this->column = this->columns - 1;
+    }
 };
 
 void CharacterLCD::move_right() {
     this->put(LCD_CURSORSHIFT | LCD_DISPLAYMOVE | LCD_MOVERIGHT);
-    // TODO: Update buffer?
+    this->reset_buffer(true);
+    if (this->column < this->columns - 1) {
+        this->column++;
+    } else if (this->row < this->rows - 1) {
+        this->row++;
+        this->column = 0;
+    }
 };
 
 void CharacterLCD::create_char(uint8_t location, uint8_t * pattern) {
