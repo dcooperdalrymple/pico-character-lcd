@@ -8,10 +8,10 @@ public:
     virtual ~DigitalInOut() { };
 
     virtual void set_dir(bool out) { };
-    virtual bool get_dir() { };
+    virtual bool get_dir() { return false; };
 
     virtual void put(bool value) { };
-    virtual bool get() { };
+    virtual bool get() { return false; };
 
 };
 
